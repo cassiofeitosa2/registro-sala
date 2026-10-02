@@ -1,0 +1,557 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Registro de sala</title>
+<style>
+:root{font:16px system-ui,sans-serif;color:#173b43;background:#f3f7f7}*{box-sizing:border-box}body{margin:0}header{background:#205a68;color:white;padding:18px max(18px,calc((100vw - 1440px)/2));display:flex;justify-content:space-between;align-items:center;gap:14px;flex-wrap:wrap}h1{font-size:1.35rem;margin:0}header p{margin:5px 0 0;font-size:.9rem}.header-actions{display:flex;gap:8px;align-items:center;flex-wrap:wrap}.badge{display:inline-flex;align-items:center;border-radius:999px;padding:6px 10px;font-size:.82rem;font-weight:700;background:#ffffff22;border:1px solid #ffffff40}.header-actions button{background:white;color:#205a68;padding:8px 12px}main{width:min(100%,1480px);margin:auto;padding:18px 24px;display:grid;gap:16px}.card{background:white;border:1px solid #d3e2e2;border-radius:14px;padding:18px;box-shadow:0 2px 9px #173b4310}h2{font-size:1.08rem;margin:0 0 14px}.grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}.settings .grid{grid-template-columns:repeat(2,minmax(0,1fr))}label{display:block;font-weight:650;font-size:.9rem}input,select,textarea,button{font:inherit}input,select,textarea{display:block;margin-top:5px;width:100%;border:1px solid #aabfc3;border-radius:8px;background:white;padding:10px;color:#173b43}textarea{min-height:72px;resize:vertical}button{border:0;border-radius:8px;padding:10px 14px;cursor:pointer;font-weight:650;background:#205a68;color:white}button.secondary{background:#e2f1f1;color:#173b43}button.danger{background:#a84444}button:disabled{opacity:.55;cursor:not-allowed}.actions{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}.hint{color:#49676c;font-size:.88rem}.full{grid-column:1/-1}table{width:100%;border-collapse:collapse;font-size:.9rem}th,td{text-align:left;padding:9px;border-bottom:1px solid #e3eded;vertical-align:top}th{background:#eef6f6}#rows{overflow-x:auto}details{margin-top:12px}summary{cursor:pointer;font-weight:650}ul{padding-left:20px}#calendar{display:grid;grid-template-columns:repeat(7,1fr);gap:5px;margin-top:12px}.day{min-height:55px;background:#f5f9f9;border:1px solid #d7e5e5;color:#173b43;padding:5px;font-size:.85rem;text-align:left}.day.active{outline:2px solid #205a68}.day strong{display:block}.day small{color:#a84444}.weekday{text-align:center;font-size:.75rem;font-weight:700}.blank{min-height:1px}.top{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}#notice,#authNotice{min-height:1.3em;color:#205a68;font-weight:650}.auth-wrap{max-width:520px;margin:6vh auto 0}.auth-card{padding:26px}.auth-card h2{font-size:1.4rem}.auth-card .actions button{flex:1;min-width:160px}.demo-note{background:#fff8df;border:1px solid #ead99b;border-radius:10px;padding:10px 12px;color:#6a5515;font-size:.9rem}.viewer-note{background:#edf6f6;border:1px solid #cfe2e2;border-radius:10px;padding:10px 12px;color:#274f57;font-size:.9rem}.hidden{display:none!important}.loading{opacity:.7;pointer-events:none}@media(max-width:900px){.grid{grid-template-columns:repeat(2,minmax(0,1fr))}}@media(max-width:620px){.grid,.settings .grid{grid-template-columns:1fr}main{padding:12px}.card{padding:14px}th,td{font-size:.79rem;padding:6px}.day{min-height:46px}.auth-wrap{margin-top:10px}.auth-card{padding:18px}}#rulesPrint{display:none}body.print-rules #rulesPrint{display:block}@media print{header,.actions,.settings,.calendar-card,button,.auth-wrap,.mode-note{display:none!important}main{padding:0}.card{box-shadow:none;border:0}body.print-rules main>.card{display:none!important}body.print-rules #rulesPrint{display:block!important}body.print-rules #rulesPrint table{font-size:11pt}body.print-rules #rulesPrint th,body.print-rules #rulesPrint td{padding:12px 10px}body.print-rules #rulesPrint tr{break-inside:avoid}@page{size:A4;margin:17mm}}
+
+#studentHistoryRows{overflow-x:auto}.history-summary{margin:12px 0;padding:11px 13px;background:#f4f8f8;border:1px solid #d7e5e5;border-radius:10px;color:#274f57}.history-summary strong{color:#173b43}.print-only{display:none}
+@media print{
+  body.print-student header,body.print-student #appMain>section:not(#studentHistoryCard){display:none!important}
+  body.print-student #studentHistoryCard{display:block!important;box-shadow:none;border:0;padding:0}
+  body.print-student #studentHistoryCard .history-controls,body.print-student #studentHistoryCard>.actions,body.print-student #studentHistoryCard>.hint{display:none!important}
+  body.print-student #studentPrintHeader{display:block!important;margin-bottom:14px}
+  body.print-student #studentPrintHeader h1{font-size:17pt;margin:0 0 5px;color:#173b43}
+  body.print-student #studentPrintHeader p{margin:2px 0;font-size:10.5pt}
+  body.print-student #studentHistoryCard h2{display:none!important}
+  body.print-student #studentHistoryRows table{font-size:10pt}
+  body.print-student #studentHistoryRows th,body.print-student #studentHistoryRows td{padding:8px 7px}
+  body.print-student #studentHistoryRows tr{break-inside:avoid}
+}
+</style>
+</head>
+<body>
+<header>
+  <div><h1>Registro de sala</h1><p>Registro objetivo de intervenções pedagógicas</p></div>
+  <div class="header-actions"><span id="modeBadge" class="badge">Aguardando acesso</span><button id="logout" class="hidden">Sair</button></div>
+</header>
+
+<main id="authMain" class="auth-wrap">
+  <section class="card auth-card">
+    <h2>Acessar o aplicativo</h2>
+    <p class="hint">Digite seu código de acesso. Quem entrar sem código usa apenas uma demonstração com dados fictícios e nada é salvo.</p>
+    <label>Código de acesso
+      <input id="accessCode" type="password" autocomplete="current-password" placeholder="Digite o código">
+    </label>
+    <div class="actions">
+      <button id="login">Entrar</button>
+      <button class="secondary" id="demo">Usar sem código</button>
+    </div>
+    <p id="authNotice" role="status"></p>
+  </section>
+</main>
+
+<main id="appMain" class="hidden">
+  <section id="modeNote" class="mode-note hidden"></section>
+
+  <section class="card" id="newRecordCard">
+    <h2>Novo registro</h2>
+    <div class="grid">
+      <label>Data<input id="date" type="date"></label>
+      <label>Horário<input id="time" type="time"></label>
+      <label>Turma<select id="class"></select></label>
+      <label>Estudante<select id="student"></select></label>
+      <label>Conduta observada<select id="code"></select></label>
+      <label>Intervenção<select id="action"></select></label>
+      <label>Resultado<select id="outcome"><option>Orientação atendida</option><option>Conduta persistiu</option><option>Atividade retomada</option><option>Encaminhado à coordenação</option><option>Encaminhado à direção</option><option>Outra providência</option></select></label>
+      <label>Etapa da aula<select id="phase"><option>Explicação</option><option>Atividade individual</option><option>Atividade em grupo</option><option>Transição</option><option>Outra</option></select></label>
+      <label class="full">Complemento factual (opcional)<textarea id="detail" placeholder="Ex.: após a segunda orientação, voltou a conversar em voz alta durante a explicação."></textarea></label>
+    </div>
+    <div class="actions"><button id="save">Salvar registro</button><button class="secondary" id="clear">Limpar campos</button></div>
+    <p id="notice" role="status"></p>
+    <p class="hint">Para ameaça, agressão ou risco, acione a equipe da escola imediatamente. O aplicativo não decide sanções.</p>
+  </section>
+
+  <section class="card calendar-card"><div class="top"><h2>Calendário</h2><input id="month" type="month" aria-label="Mês do calendário" style="max-width:180px"></div><div id="calendar"></div><p class="hint">Toque em um dia para mostrar os registros daquela data.</p></section>
+
+  <section class="card" id="studentHistoryCard">
+    <div class="top"><h2>Histórico por estudante <span id="historyCount"></span></h2></div>
+    <div class="grid history-controls">
+      <label>Turma<select id="historyClass"></select></label>
+      <label>Estudante<select id="historyStudent"></select></label>
+    </div>
+    <div id="studentPrintHeader" class="print-only"></div>
+    <div id="historySummary" class="history-summary hidden"></div>
+    <div id="studentHistoryRows"></div>
+    <div class="actions">
+      <button id="printStudent" disabled>Imprimir histórico deste aluno</button>
+      <button class="secondary" id="clearHistory">Limpar seleção</button>
+    </div>
+    <p class="hint">Selecione a turma e o estudante para consultar todos os registros dele, independentemente do filtro do calendário.</p>
+  </section>
+
+  <section class="card"><div class="top"><h2>Registros <span id="count"></span></h2><button class="secondary" id="all">Ver todos</button></div><div id="rows"></div><div class="actions" id="recordActions"><button class="secondary" id="csv">Exportar CSV</button><button class="secondary" id="backup">Baixar backup JSON</button><button class="secondary" id="print">Imprimir registros</button></div></section>
+
+  <section class="card" id="rulesPrint"><div class="top"><h2>Combinados de convivência nas aulas</h2><div class="actions"><button id="doPrintRules">Imprimir esta folha</button><button class="secondary" id="closeRules">Fechar prévia</button></div></div><p>Estes códigos descrevem situações que podem receber orientação e registro. Cada situação será considerada em seu contexto. Os procedimentos de encaminhamento seguem as regras da escola.</p><table><thead><tr><th>Código</th><th>O que será observado</th></tr></thead><tbody id="rulesRows"></tbody></table><p>Durante a explicação, todos precisam ouvir e poder perguntar. Em atividades individuais e em grupo, a conversa segue as orientações do professor para aquele momento.</p></section>
+
+  <section class="card settings" id="settingsCard"><h2>Configuração</h2>
+    <div class="grid"><div style="background:#edf6f6;border-radius:12px;padding:16px"><h2>Alunos por turma</h2><label>1. Escolha a turma para cadastrar os alunos<select id="rosterClass"></select></label><label style="margin-top:14px"><span id="rosterLabel">Alunos da turma</span><textarea id="students" rows="8" placeholder="Um nome por linha"></textarea></label><p class="hint" id="rosterCount"></p><button id="saveRoster">Salvar alunos desta turma</button><p id="rosterNotice" role="status" class="hint"></p></div>
+    <div><label>Turmas disponíveis (uma por linha)<textarea id="classes" rows="5" placeholder="6ºA&#10;6ºB&#10;7ºA&#10;7ºB"></textarea></label><p class="hint">Depois de alterar as turmas, clique em Salvar listas. Use o seletor ao lado para cadastrar os alunos de cada uma.</p><label>Intervenções (uma por linha)<textarea id="actions" rows="5"></textarea></label></div>
+    <label class="full">Condutas (uma por linha, código | descrição)<textarea id="codes" rows="7"></textarea></label></div>
+    <div class="actions"><button id="saveSettings">Salvar listas</button><button class="secondary" id="printRules">Imprimir códigos para a turma</button><label style="font-weight:normal">Restaurar backup JSON<input type="file" id="restore" accept="application/json,.json"></label></div>
+    <p id="settingsNotice" role="status" class="hint"></p>
+    <p class="hint">No modo administrador, turmas, alunos, condutas, intervenções e registros são armazenados no Supabase e ficam disponíveis em seus dispositivos.</p>
+    <details><summary>Critérios sugeridos</summary><ul><li>Registre atos observáveis e a orientação dada; evite rótulos sobre o estudante.</li><li>Para a mesma chegada, escolha C9 ou C10. Considere a justificativa do estudante e as regras de horário da escola.</li><li>Alinhe encaminhamentos e contato com responsáveis à rotina da escola.</li><li>Um registro não equivale automaticamente a uma punição.</li></ul></details>
+  </section>
+</main>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+'use strict';
+
+const SUPABASE_URL = 'https://hgnhpmtnlongdowowexm.supabase.co';
+const SUPABASE_KEY = 'sb_publishable_dEWz9ehZNVJy2hsBJTr0qA_f1c8PIvf';
+const ADMIN_EMAIL = 'cassiofeitosa2@gmail.com';
+const VIEWER_EMAIL = 'visualizador@registros.app';
+const sb = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+
+const baseCodes = [
+  'C1 | Conversar em voz alta, chamar colegas ou interromper repetidamente a explicação após orientação para aguardar ou falar no momento combinado',
+  'C2 | Levantar-se e circular pela sala repetidamente durante uma atividade, após orientação para retornar ao lugar, sem necessidade apresentada',
+  'C3 | Usar celular ou outro aparelho durante a aula fora das situações autorizadas pelas regras da escola e pela atividade proposta',
+  'C4 | Recusar expressamente uma orientação pedagógica, como iniciar uma atividade ou mudar de lugar, depois de receber a orientação de modo claro',
+  'C5 | Dirigir xingamento, apelido ofensivo, provocação insistente ou comentário humilhante a colega ou profissional da escola',
+  'C6 | Repetir ações que interrompem o trabalho da turma, como gritar, bater objetos ou atrapalhar colegas, mesmo após orientação',
+  'C7 | Riscar, rasgar, quebrar ou danificar material de colega, da sala ou da escola',
+  'C8 | Ameaçar, empurrar, bater ou praticar outra ação que coloque alguém em risco; comunicar imediatamente à equipe da escola',
+  'C9 | Chegar à sala após a entrada do professor, no horário previsto para a aula ou no retorno do intervalo',
+  'C10 | Chegar à sala com a aula já em andamento, bem depois do início; registrar o horário de chegada e, quando possível, os minutos de atraso'
+];
+const baseActions = ['Orientação verbal','Segunda orientação','Mudança de lugar','Apoio individual','Encaminhamento à coordenação','Encaminhamento à direção'];
+const emptyData = () => ({classes:['6ºA','6ºB','7ºA','7ºB'],students:{'6ºA':[],'6ºB':[],'7ºA':[],'7ºB':[]},codes:[...baseCodes],actions:[...baseActions],records:[],setupVersion:2});
+const demoData = () => ({classes:['Turma Demonstração'],students:{'Turma Demonstração':['Estudante 1','Estudante 2','Estudante 3']},codes:[...baseCodes],actions:[...baseActions],records:[],setupVersion:2});
+
+let data = emptyData();
+let mode = 'locked'; // locked | demo | visualizador | admin
+let filter = null;
+let rosterActive = '';
+let rosterDrafts = {};
+
+const $ = id => document.getElementById(id);
+const pad = n => String(n).padStart(2,'0');
+const now = new Date();
+const today = `${now.getFullYear()}-${pad(now.getMonth()+1)}-${pad(now.getDate())}`;
+
+$('date').value = today;
+$('time').value = `${pad(now.getHours())}:${pad(now.getMinutes())}`;
+$('month').value = today.slice(0,7);
+
+function setBusy(busy){
+  $('authMain').classList.toggle('loading', busy);
+  $('login').disabled = busy;
+  $('demo').disabled = busy;
+}
+
+function setModeUI(){
+  const badge = $('modeBadge');
+  const note = $('modeNote');
+  note.className = 'mode-note';
+  $('logout').classList.toggle('hidden', mode === 'locked');
+  $('newRecordCard').classList.toggle('hidden', mode === 'visualizador');
+  $('settingsCard').classList.toggle('hidden', mode !== 'admin');
+  $('recordActions').classList.toggle('hidden', mode === 'visualizador');
+
+  if(mode === 'admin'){
+    badge.textContent = 'Administrador';
+    note.classList.add('viewer-note');
+    note.textContent = 'Modo administrador — registros e configurações são salvos no banco de dados online.';
+  } else if(mode === 'visualizador'){
+    badge.textContent = 'Somente visualização';
+    note.classList.add('viewer-note');
+    note.textContent = 'Modo visualizador — é possível consultar os registros, mas não criar, alterar ou excluir.';
+  } else if(mode === 'demo'){
+    badge.textContent = 'Demonstração';
+    note.classList.add('demo-note');
+    note.textContent = 'Modo demonstração — dados fictícios e temporários. Nada é enviado ao banco e tudo desaparece ao sair ou atualizar a página.';
+  } else {
+    badge.textContent = 'Aguardando acesso';
+  }
+  note.classList.toggle('hidden', mode === 'locked');
+}
+
+function option(select, items, placeholder){
+  const old = select.value;
+  select.replaceChildren();
+  const first = document.createElement('option');
+  first.value = '';
+  first.textContent = placeholder;
+  select.append(first);
+  items.forEach(v=>{const o=document.createElement('option');o.value=v;o.textContent=v;select.append(o)});
+  if(items.includes(old)) select.value=old;
+}
+
+function refreshSelects(){
+  option($('class'),data.classes,'Selecione a turma');
+  option($('code'),data.codes,'Selecione a conduta');
+  option($('action'),data.actions,'Selecione a intervenção');
+  refreshStudents();
+  refreshHistoryClasses();
+}
+function refreshStudents(){option($('student'),data.students[$('class').value]||[],'Selecione o estudante')}
+$('class').addEventListener('change',refreshStudents);
+
+function refreshHistoryClasses(){
+  option($('historyClass'),data.classes,'Selecione a turma');
+  refreshHistoryStudents();
+}
+function refreshHistoryStudents(){
+  option($('historyStudent'),data.students[$('historyClass').value]||[],'Selecione o estudante');
+  renderStudentHistory();
+}
+$('historyClass').addEventListener('change',refreshHistoryStudents);
+$('historyStudent').addEventListener('change',renderStudentHistory);
+
+function lines(s){return [...new Set(s.split(/\r?\n/).map(x=>x.trim()).filter(Boolean))]}
+function rememberRoster(){if(rosterActive)rosterDrafts[rosterActive]=$('students').value}
+function showRoster(){
+  rosterActive=$('rosterClass').value;
+  $('rosterLabel').textContent=rosterActive?'Alunos do '+rosterActive+' (um por linha)':'Alunos da turma';
+  $('students').value=rosterActive?(rosterDrafts[rosterActive]??(data.students[rosterActive]||[]).join('\n')):'';
+  $('saveRoster').textContent=rosterActive?'Salvar alunos do '+rosterActive:'Salvar alunos';
+  updateRosterCount();
+}
+function updateRosterCount(){$('rosterCount').textContent=rosterActive?lines($('students').value).length+' aluno(s) na lista do '+rosterActive:''}
+$('students').oninput=()=>{rememberRoster();updateRosterCount();$('rosterNotice').textContent='Alterações pendentes. Clique em Salvar alunos.'};
+$('rosterClass').onchange=()=>{rememberRoster();showRoster();$('rosterNotice').textContent=''};
+function settings(){
+  $('classes').value=data.classes.join('\n');
+  $('codes').value=data.codes.join('\n');
+  $('actions').value=data.actions.join('\n');
+  option($('rosterClass'),data.classes,'Selecione a turma');
+  if(!$('rosterClass').value)$('rosterClass').value=data.classes[0]||'';
+  showRoster();
+}
+function saveRosterDrafts(){rememberRoster();for(const [c,names] of Object.entries(rosterDrafts))data.students[c]=lines(names);rosterDrafts={}}
+
+async function saveConfigToCloud(){
+  if(mode !== 'admin') return false;
+  const payload={id:1,classes:data.classes,students:data.students,codes:data.codes,actions:data.actions,updated_at:new Date().toISOString()};
+  const {error}=await sb.from('configuracoes').upsert(payload,{onConflict:'id'});
+  if(error){console.error(error);throw error}
+  return true;
+}
+
+function dbToRecord(r){
+  return {id:r.id,date:r.data,time:(r.horario||'').slice(0,5),class:r.turma,student:r.aluno,code:r.conduta,action:r.intervencao||'',outcome:r.resultado||'',phase:r.etapa||'',detail:r.observacao||''};
+}
+function recordToDb(r){
+  return {data:r.date,horario:r.time,turma:r.class,aluno:r.student,conduta:r.code,intervencao:r.action,resultado:r.outcome,etapa:r.phase,observacao:r.detail||null};
+}
+
+async function loadCloudData(){
+  const {data:cfg,error:cfgError}=await sb.from('configuracoes').select('id,classes,students,codes,actions').eq('id',1).maybeSingle();
+  if(cfgError) throw cfgError;
+  data = emptyData();
+  if(cfg){
+    data.classes = Array.isArray(cfg.classes)?cfg.classes:[];
+    data.students = cfg.students && typeof cfg.students==='object'?cfg.students:{};
+    data.codes = Array.isArray(cfg.codes)?cfg.codes:[...baseCodes];
+    data.actions = Array.isArray(cfg.actions)?cfg.actions:[...baseActions];
+  } else if(mode === 'admin') {
+    await saveConfigToCloud();
+  }
+  const {data:rows,error:rowsError}=await sb.from('registros').select('*').order('data',{ascending:false}).order('horario',{ascending:false});
+  if(rowsError) throw rowsError;
+  data.records=(rows||[]).map(dbToRecord);
+}
+
+async function getCurrentRole(){
+  const {data:userData,error:userError}=await sb.auth.getUser();
+  if(userError || !userData.user) return null;
+  const {data:profile,error}=await sb.from('perfis').select('tipo').eq('user_id',userData.user.id).maybeSingle();
+  if(error) throw error;
+  return profile?.tipo || null;
+}
+
+async function enterAuthenticatedApp(){
+  const role = await getCurrentRole();
+  if(!['admin','visualizador'].includes(role)){
+    await sb.auth.signOut();
+    throw new Error('Conta sem permissão configurada.');
+  }
+  mode=role;
+  setModeUI();
+  await loadCloudData();
+  finishOpenApp();
+}
+
+function finishOpenApp(){
+  $('authMain').classList.add('hidden');
+  $('appMain').classList.remove('hidden');
+  refreshSelects();settings();renderRules();render();
+}
+
+async function loginWithCode(code){
+  const c=code.trim();
+  if(!c) throw new Error('Digite o código de acesso.');
+  const upper=c.toUpperCase();
+  let candidates;
+  if(upper.startsWith('A-')) candidates=[ADMIN_EMAIL];
+  else if(upper.startsWith('V-')) candidates=[VIEWER_EMAIL];
+  else candidates=[ADMIN_EMAIL,VIEWER_EMAIL];
+
+  let lastError=null;
+  for(const email of candidates){
+    const {error}=await sb.auth.signInWithPassword({email,password:c});
+    if(!error) return true;
+    lastError=error;
+  }
+  if(lastError) console.warn(lastError.message);
+  throw new Error('Código de acesso inválido.');
+}
+
+$('login').onclick=async()=>{
+  $('authNotice').textContent='';
+  setBusy(true);
+  try{
+    await loginWithCode($('accessCode').value);
+    await enterAuthenticatedApp();
+    $('accessCode').value='';
+  }catch(e){
+    console.error(e);
+    $('authNotice').textContent=e.message||'Não foi possível entrar.';
+    try{await sb.auth.signOut()}catch{}
+  }finally{setBusy(false)}
+};
+$('accessCode').addEventListener('keydown',e=>{if(e.key==='Enter')$('login').click()});
+
+$('demo').onclick=()=>{
+  mode='demo';data=demoData();filter=null;rosterDrafts={};rosterActive='';setModeUI();finishOpenApp();
+};
+
+$('logout').onclick=async()=>{
+  try{if(mode==='admin'||mode==='visualizador')await sb.auth.signOut()}catch(e){console.error(e)}
+  mode='locked';data=emptyData();filter=null;rosterDrafts={};rosterActive='';
+  $('appMain').classList.add('hidden');$('authMain').classList.remove('hidden');$('authNotice').textContent='';setModeUI();
+};
+
+$('saveRoster').onclick=async()=>{
+  if(mode!=='admin')return;
+  try{saveRosterDrafts();await saveConfigToCloud();refreshStudents();refreshHistoryClasses();$('rosterNotice').textContent='Listas de alunos salvas. '+rosterActive+': '+(data.students[rosterActive]||[]).length+' aluno(s).'}
+  catch(e){console.error(e);$('rosterNotice').textContent='Não foi possível salvar as listas.'}
+};
+
+$('saveSettings').onclick=async()=>{
+  if(mode!=='admin')return;
+  const classes=lines($('classes').value);
+  if(!classes.length){$('settingsNotice').textContent='Cadastre pelo menos uma turma.';return}
+  try{
+    saveRosterDrafts();data.classes=classes;data.codes=lines($('codes').value);data.actions=lines($('actions').value);
+    for(const c of data.classes)if(!data.students[c])data.students[c]=[];
+    await saveConfigToCloud();refreshSelects();renderRules();settings();$('settingsNotice').textContent='Turmas, alunos, condutas e intervenções salvos no banco de dados.';
+  }catch(e){console.error(e);$('settingsNotice').textContent='Não foi possível salvar as configurações.'}
+};
+
+$('save').onclick=async()=>{
+  const required=['date','time','class','student','code','action'];
+  if(required.some(id=>!$(id).value)){$('notice').textContent='Preencha data, horário, turma, estudante, conduta e intervenção.';return}
+  const record={id:mode==='demo'?crypto.randomUUID():null,date:$('date').value,time:$('time').value,class:$('class').value,student:$('student').value,code:$('code').value,action:$('action').value,outcome:$('outcome').value,phase:$('phase').value,detail:$('detail').value.trim()};
+  try{
+    if(mode==='demo') data.records.push(record);
+    else if(mode==='admin'){
+      const {error}=await sb.from('registros').insert(recordToDb(record));
+      if(error) throw error;
+      await loadCloudData();
+    } else return;
+    $('detail').value='';$('notice').textContent=mode==='demo'?'Registro criado apenas nesta demonstração.':'Registro salvo no banco de dados.';render();
+  }catch(e){console.error(e);$('notice').textContent='Não foi possível salvar o registro.'}
+};
+
+$('clear').onclick=()=>{$('detail').value='';$('code').value='';$('action').value='';$('outcome').selectedIndex=0;$('notice').textContent='Campos de ocorrência limpos.'};
+
+function renderCalendar(){
+  let [y,m]=$('month').value.split('-').map(Number);if(!y||!m)return;
+  let el=$('calendar');el.replaceChildren();
+  ['D','S','T','Q','Q','S','S'].forEach(w=>{let n=document.createElement('div');n.className='weekday';n.textContent=w;el.append(n)});
+  for(let i=0;i<new Date(y,m-1,1).getDay();i++){let n=document.createElement('div');n.className='blank';el.append(n)}
+  for(let d=1;d<=new Date(y,m,0).getDate();d++){
+    let day=`${y}-${pad(m)}-${pad(d)}`,n=document.createElement('button');n.className='day'+(filter===day?' active':'');let strong=document.createElement('strong');strong.textContent=d;n.append(strong);
+    let count=data.records.filter(r=>r.date===day).length;if(count){let small=document.createElement('small');small.textContent=`${count} registro${count>1?'s':''}`;n.append(small)}
+    n.onclick=()=>{filter=day;$('date').value=day;render()};el.append(n)
+  }
+}
+
+function render(){
+  renderCalendar();
+  let arr=data.records.filter(r=>!filter||r.date===filter).sort((a,b)=>(b.date+' '+b.time).localeCompare(a.date+' '+a.time));
+  $('count').textContent=`(${arr.length}${filter?' no dia '+filter:''})`;
+  let el=$('rows');el.replaceChildren();
+  if(!arr.length){let p=document.createElement('p');p.className='hint';p.textContent='Nenhum registro neste período.';el.append(p);renderStudentHistory();return}
+  let table=document.createElement('table'),thead=document.createElement('thead'),tr=document.createElement('tr');
+  const headers=['Data/hora','Turma / estudante','Conduta','Intervenção / resultado','Complemento'];
+  if(mode!=='visualizador')headers.push('');
+  headers.forEach(t=>{let th=document.createElement('th');th.textContent=t;tr.append(th)});thead.append(tr);table.append(thead);
+  let tbody=document.createElement('tbody');
+  arr.forEach(r=>{
+    let row=document.createElement('tr');
+    [`${r.date} ${r.time}`,`${r.class} · ${r.student}`,r.code,`${r.action} · ${r.outcome}`,r.detail||'—'].forEach(v=>{let td=document.createElement('td');td.textContent=v;row.append(td)});
+    if(mode!=='visualizador'){
+      let td=document.createElement('td'),btn=document.createElement('button');btn.className='danger';btn.textContent='Excluir';btn.setAttribute('aria-label',`Excluir registro de ${r.student} em ${r.date}`);
+      btn.onclick=async()=>{
+        if(!confirm('Excluir este registro?'))return;
+        try{
+          if(mode==='demo') data.records=data.records.filter(x=>x.id!==r.id);
+          else if(mode==='admin'){
+            const {error}=await sb.from('registros').delete().eq('id',r.id);if(error)throw error;await loadCloudData();
+          }
+          render();
+        }catch(e){console.error(e);alert('Não foi possível excluir o registro.')}
+      };
+      td.append(btn);row.append(td)
+    }
+    tbody.append(row)
+  });
+  table.append(tbody);el.append(table);
+  renderStudentHistory();
+}
+
+
+function formatDateBR(value){
+  if(!value)return '';
+  const parts=String(value).split('-');
+  return parts.length===3?`${parts[2]}/${parts[1]}/${parts[0]}`:String(value);
+}
+
+function getStudentHistory(){
+  const turma=$('historyClass').value;
+  const estudante=$('historyStudent').value;
+  if(!turma||!estudante)return [];
+  return data.records
+    .filter(r=>r.class===turma&&r.student===estudante)
+    .sort((a,b)=>(b.date+' '+b.time).localeCompare(a.date+' '+a.time));
+}
+
+function renderStudentHistory(){
+  const turma=$('historyClass').value;
+  const estudante=$('historyStudent').value;
+  const arr=getStudentHistory();
+  const el=$('studentHistoryRows');
+  const summary=$('historySummary');
+  el.replaceChildren();
+  $('historyCount').textContent=estudante?`(${arr.length})`:'';
+  $('printStudent').disabled=!estudante||arr.length===0;
+
+  if(!turma||!estudante){
+    summary.classList.add('hidden');
+    const p=document.createElement('p');p.className='hint';p.textContent='Escolha uma turma e um estudante para visualizar o histórico completo.';el.append(p);return;
+  }
+
+  summary.classList.remove('hidden');
+  summary.replaceChildren();
+  const identity=document.createElement('div');
+  const strong=document.createElement('strong');strong.textContent=estudante;
+  identity.append(strong,document.createTextNode(' · '+turma));
+  summary.append(identity);
+  if(arr.length){
+    const dates=arr.map(r=>r.date).filter(Boolean).sort();
+    const inicio=formatDateBR(dates[0]);
+    const fim=formatDateBR(dates[dates.length-1]);
+    const periodo=inicio===fim?inicio:`${inicio} a ${fim}`;
+    const details=document.createElement('div');details.textContent=`${arr.length} registro${arr.length===1?'':'s'} · Período: ${periodo}`;summary.append(details);
+  }else{
+    const details=document.createElement('div');details.textContent='Nenhum registro encontrado para este estudante.';summary.append(details);
+    const p=document.createElement('p');p.className='hint';p.textContent='Nenhum registro encontrado para este estudante.';el.append(p);return;
+  }
+
+  const table=document.createElement('table');
+  const thead=document.createElement('thead');
+  const tr=document.createElement('tr');
+  ['Data/hora','Conduta','Intervenção / resultado','Etapa da aula','Complemento'].forEach(t=>{const th=document.createElement('th');th.textContent=t;tr.append(th)});
+  thead.append(tr);table.append(thead);
+  const tbody=document.createElement('tbody');
+  arr.forEach(r=>{
+    const row=document.createElement('tr');
+    [`${formatDateBR(r.date)} ${r.time||''}`.trim(),r.code,`${r.action||'—'}${r.outcome?' · '+r.outcome:''}`,r.phase||'—',r.detail||'—'].forEach(v=>{const td=document.createElement('td');td.textContent=v||'—';row.append(td)});
+    tbody.append(row);
+  });
+  table.append(tbody);el.append(table);
+}
+
+function printStudentHistory(){
+  const turma=$('historyClass').value;
+  const estudante=$('historyStudent').value;
+  const arr=getStudentHistory();
+  if(!turma||!estudante||!arr.length)return;
+  const dates=arr.map(r=>r.date).filter(Boolean).sort();
+  const inicio=formatDateBR(dates[0]);
+  const fim=formatDateBR(dates[dates.length-1]);
+  const periodo=inicio===fim?inicio:`${inicio} a ${fim}`;
+  const printHeader=$('studentPrintHeader');
+  printHeader.replaceChildren();
+  const title=document.createElement('h1');title.textContent='Histórico de registros do estudante';printHeader.append(title);
+  [['Estudante',estudante],['Turma',turma],['Total de registros',String(arr.length)],['Período',periodo]].forEach(([label,value])=>{const p=document.createElement('p');const strong=document.createElement('strong');strong.textContent=label+': ';p.append(strong,document.createTextNode(value));printHeader.append(p)});
+  document.body.classList.remove('print-rules');
+  document.body.classList.add('print-student');
+  window.print();
+}
+
+$('printStudent').onclick=printStudentHistory;
+$('clearHistory').onclick=()=>{
+  $('historyClass').value='';
+  refreshHistoryStudents();
+};
+window.addEventListener('afterprint',()=>document.body.classList.remove('print-student'));
+
+function renderRules(){
+  let el=$('rulesRows');el.replaceChildren();
+  data.codes.forEach(item=>{let match=item.match(/^([^|]+)\|(.+)$/),tr=document.createElement('tr');[match?match[1].trim():'—',match?match[2].trim():item].forEach(v=>{let td=document.createElement('td');td.textContent=v;tr.append(td)});el.append(tr)})
+}
+
+$('month').onchange=renderCalendar;
+$('all').onclick=()=>{filter=null;render()};
+$('print').onclick=()=>print();
+$('printRules').onclick=()=>{renderRules();document.body.classList.add('print-rules');$('rulesPrint').scrollIntoView({behavior:'smooth',block:'start'})};
+$('doPrintRules').onclick=()=>window.print();
+$('closeRules').onclick=()=>document.body.classList.remove('print-rules');
+
+function download(name,content,type){let a=document.createElement('a'),u=URL.createObjectURL(new Blob([content],{type}));a.href=u;a.download=name;a.click();setTimeout(()=>URL.revokeObjectURL(u),1500)}
+$('backup').onclick=()=>{if(mode!=='admin'&&mode!=='demo')return;download(`registro-sala-backup-${today}.json`,JSON.stringify(data,null,2),'application/json')};
+$('csv').onclick=()=>{
+  if(mode!=='admin'&&mode!=='demo')return;
+  let keys=['date','time','class','student','phase','code','action','outcome','detail'];
+  let quote=x=>{let s=String(x??'');if(/^[\s]*[=+@-]/.test(s))s="'"+s;return '"'+s.replaceAll('"','""')+'"'};
+  let rows=[['Data','Horário','Turma','Estudante','Etapa','Conduta','Intervenção','Resultado','Complemento'],...data.records.map(r=>keys.map(k=>r[k]))];
+  download(`registro-sala-${today}.csv`,'\ufeff'+rows.map(row=>row.map(quote).join(';')).join('\r\n'),'text/csv;charset=utf-8')
+};
+
+$('restore').onchange=async e=>{
+  if(mode!=='admin'){e.target.value='';return}
+  let file=e.target.files[0];if(!file)return;
+  try{
+    let v=JSON.parse(await file.text());
+    if(!Array.isArray(v.classes)||!Array.isArray(v.codes)||!Array.isArray(v.actions)||!Array.isArray(v.records)||typeof v.students!=='object'||!v.students)throw Error('Formato inválido');
+    if(!confirm('Substituir as configurações e TODOS os registros online pelos dados deste backup?')){e.target.value='';return}
+    data={classes:v.classes,students:v.students,codes:v.codes,actions:v.actions,records:[],setupVersion:v.setupVersion||2};
+    await saveConfigToCloud();
+    const {error:delError}=await sb.from('registros').delete().neq('id',-1);if(delError)throw delError;
+    if(v.records.length){
+      const payload=v.records.map(r=>recordToDb(r));
+      const {error:insError}=await sb.from('registros').insert(payload);if(insError)throw insError;
+    }
+    rosterDrafts={};rosterActive='';await loadCloudData();refreshSelects();settings();renderRules();render();$('notice').textContent='Backup restaurado no banco de dados.';
+  }catch(err){console.error(err);$('notice').textContent='Não foi possível restaurar o backup.'}
+  e.target.value='';
+};
+
+async function boot(){
+  setModeUI();
+  try{
+    const {data:sessionData}=await sb.auth.getSession();
+    if(sessionData.session){
+      $('authNotice').textContent='Sessão encontrada. Carregando...';
+      setBusy(true);
+      await enterAuthenticatedApp();
+    }
+  }catch(e){
+    console.error(e);
+    try{await sb.auth.signOut()}catch{}
+    mode='locked';setModeUI();$('authNotice').textContent='Não foi possível recuperar a sessão. Digite seu código novamente.';
+  }finally{setBusy(false)}
+}
+
+boot();
+</script>
+</body>
+</html>

@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Registro de sala</title>
 <style>
-:root{font:16px system-ui,sans-serif;color:#173b43;background:#f3f7f7}*{box-sizing:border-box}body{margin:0}header{background:#205a68;color:white;padding:18px max(18px,calc((100vw - 1440px)/2));display:flex;justify-content:space-between;align-items:center;gap:14px;flex-wrap:wrap}h1{font-size:1.35rem;margin:0}header p{margin:5px 0 0;font-size:.9rem}.header-actions{display:flex;gap:8px;align-items:center;flex-wrap:wrap}.badge{display:inline-flex;align-items:center;border-radius:999px;padding:6px 10px;font-size:.82rem;font-weight:700;background:#ffffff22;border:1px solid #ffffff40}.header-actions button{background:white;color:#205a68;padding:8px 12px}main{width:min(100%,1480px);margin:auto;padding:18px 24px;display:grid;gap:16px}.card{background:white;border:1px solid #d3e2e2;border-radius:14px;padding:18px;box-shadow:0 2px 9px #173b4310}h2{font-size:1.08rem;margin:0 0 14px}.grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}.settings .grid{grid-template-columns:repeat(2,minmax(0,1fr))}label{display:block;font-weight:650;font-size:.9rem}input,select,textarea,button{font:inherit}input,select,textarea{display:block;margin-top:5px;width:100%;border:1px solid #aabfc3;border-radius:8px;background:white;padding:10px;color:#173b43}textarea{min-height:72px;resize:vertical}button{border:0;border-radius:8px;padding:10px 14px;cursor:pointer;font-weight:650;background:#205a68;color:white}button.secondary{background:#e2f1f1;color:#173b43}button.danger{background:#a84444}button:disabled{opacity:.55;cursor:not-allowed}.actions{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}.hint{color:#49676c;font-size:.88rem}.full{grid-column:1/-1}table{width:100%;border-collapse:collapse;font-size:.9rem}th,td{text-align:left;padding:9px;border-bottom:1px solid #e3eded;vertical-align:top}th{background:#eef6f6}#rows{overflow-x:auto}details{margin-top:12px}summary{cursor:pointer;font-weight:650}ul{padding-left:20px}#calendar{display:grid;grid-template-columns:repeat(7,1fr);gap:5px;margin-top:12px}.day{min-height:55px;background:#f5f9f9;border:1px solid #d7e5e5;color:#173b43;padding:5px;font-size:.85rem;text-align:left}.day.active{outline:2px solid #205a68}.day strong{display:block}.day small{color:#a84444}.weekday{text-align:center;font-size:.75rem;font-weight:700}.blank{min-height:1px}.top{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}#notice,#authNotice{min-height:1.3em;color:#205a68;font-weight:650}.auth-wrap{max-width:520px;margin:6vh auto 0}.auth-card{padding:26px}.auth-card h2{font-size:1.4rem}.auth-card .actions button{flex:1;min-width:160px}.demo-note{background:#fff8df;border:1px solid #ead99b;border-radius:10px;padding:10px 12px;color:#6a5515;font-size:.9rem}.viewer-note{background:#edf6f6;border:1px solid #cfe2e2;border-radius:10px;padding:10px 12px;color:#274f57;font-size:.9rem}.hidden{display:none!important}.loading{opacity:.7;pointer-events:none}@media(max-width:900px){.grid{grid-template-columns:repeat(2,minmax(0,1fr))}}@media(max-width:620px){.grid,.settings .grid{grid-template-columns:1fr}main{padding:12px}.card{padding:14px}th,td{font-size:.79rem;padding:6px}.day{min-height:46px}.auth-wrap{margin-top:10px}.auth-card{padding:18px}}#rulesPrint{display:none}body.print-rules #rulesPrint{display:block}@media print{header,.actions,.settings,.calendar-card,button,.auth-wrap,.mode-note{display:none!important}main{padding:0}.card{box-shadow:none;border:0}body.print-rules main>.card{display:none!important}body.print-rules #rulesPrint{display:block!important}body.print-rules #rulesPrint table{font-size:11pt}body.print-rules #rulesPrint th,body.print-rules #rulesPrint td{padding:12px 10px}body.print-rules #rulesPrint tr{break-inside:avoid}@page{size:A4;margin:17mm}}
+:root{font:16px system-ui,sans-serif;color:#173b43;background:#f3f7f7}*{box-sizing:border-box}body{margin:0}header{background:#205a68;color:white;padding:18px max(18px,calc((100vw - 1440px)/2));display:flex;justify-content:space-between;align-items:center;gap:14px;flex-wrap:wrap}h1{font-size:1.35rem;margin:0}header p{margin:5px 0 0;font-size:.9rem}.header-actions{display:flex;gap:8px;align-items:center;flex-wrap:wrap}.badge{display:inline-flex;align-items:center;border-radius:999px;padding:6px 10px;font-size:.82rem;font-weight:700;background:#ffffff22;border:1px solid #ffffff40}.header-actions button{background:white;color:#205a68;padding:8px 12px}main{width:min(100%,1480px);margin:auto;padding:18px 24px;display:grid;gap:16px}.card{background:white;border:1px solid #d3e2e2;border-radius:14px;padding:18px;box-shadow:0 2px 9px #173b4310}h2{font-size:1.08rem;margin:0 0 14px}.grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}.settings .grid{grid-template-columns:repeat(2,minmax(0,1fr))}label{display:block;font-weight:650;font-size:.9rem}input,select,textarea,button{font:inherit}input,select,textarea{display:block;margin-top:5px;width:100%;border:1px solid #aabfc3;border-radius:8px;background:white;padding:10px;color:#173b43}textarea{min-height:72px;resize:vertical}button{border:0;border-radius:8px;padding:10px 14px;cursor:pointer;font-weight:650;background:#205a68;color:white}button.secondary{background:#e2f1f1;color:#173b43}button.danger{background:#a84444}button:disabled{opacity:.55;cursor:not-allowed}.actions{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}.hint{color:#49676c;font-size:.88rem}.full{grid-column:1/-1}table{width:100%;border-collapse:collapse;font-size:.9rem}th,td{text-align:left;padding:9px;border-bottom:1px solid #e3eded;vertical-align:top}th{background:#eef6f6}#rows{overflow-x:auto}details{margin-top:12px}summary{cursor:pointer;font-weight:650}ul{padding-left:20px}#calendar{display:grid;grid-template-columns:repeat(7,1fr);gap:5px;margin-top:12px}.day{min-height:55px;background:#f5f9f9;border:1px solid #d7e5e5;color:#173b43;padding:5px;font-size:.85rem;text-align:left}.day.active{outline:2px solid #205a68}.day strong{display:block}.day small{color:#a84444}.weekday{text-align:center;font-size:.75rem;font-weight:700}.blank{min-height:1px}.top{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}#notice,#authNotice{min-height:1.3em;color:#205a68;font-weight:650}.auth-wrap{max-width:520px;margin:6vh auto 0}.auth-card{padding:26px}.auth-card h2{font-size:1.4rem}.auth-card .actions button{flex:1;min-width:160px}.demo-note{background:#fff8df;border:1px solid #ead99b;border-radius:10px;padding:10px 12px;color:#6a5515;font-size:.9rem}.viewer-note{background:#edf6f6;border:1px solid #cfe2e2;border-radius:10px;padding:10px 12px;color:#274f57;font-size:.9rem}.hidden{display:none!important}.loading{opacity:.7;pointer-events:none}.school-card{border-left:4px solid #205a68}.school-grid{grid-template-columns:minmax(240px,520px)}.new-school-box{margin-top:14px;padding:14px;background:#f4f8f8;border:1px solid #d7e5e5;border-radius:10px}.school-name{font-weight:750}@media(max-width:900px){.grid{grid-template-columns:repeat(2,minmax(0,1fr))}}@media(max-width:620px){.grid,.settings .grid{grid-template-columns:1fr}main{padding:12px}.card{padding:14px}th,td{font-size:.79rem;padding:6px}.day{min-height:46px}.auth-wrap{margin-top:10px}.auth-card{padding:18px}}#rulesPrint{display:none}body.print-rules #rulesPrint{display:block}@media print{header,.actions,.settings,.calendar-card,button,.auth-wrap,.mode-note{display:none!important}main{padding:0}.card{box-shadow:none;border:0}body.print-rules main>.card{display:none!important}body.print-rules #rulesPrint{display:block!important}body.print-rules #rulesPrint table{font-size:11pt}body.print-rules #rulesPrint th,body.print-rules #rulesPrint td{padding:12px 10px}body.print-rules #rulesPrint tr{break-inside:avoid}@page{size:A4;margin:17mm}}
 
 #studentHistoryRows{overflow-x:auto}.history-summary{margin:12px 0;padding:11px 13px;background:#f4f8f8;border:1px solid #d7e5e5;border-radius:10px;color:#274f57}.history-summary strong{color:#173b43}.print-only{display:none}
 @media print{
@@ -45,6 +45,31 @@
 
 <main id="appMain" class="hidden">
   <section id="modeNote" class="mode-note hidden"></section>
+
+  <section class="card school-card hidden" id="schoolCard">
+    <div class="top">
+      <div>
+        <h2>Escola atual</h2>
+        <p id="schoolAccessHint" class="hint">Selecione a escola que deseja acessar.</p>
+      </div>
+      <button id="newSchool" class="secondary hidden">+ Adicionar escola</button>
+    </div>
+    <div class="grid school-grid">
+      <label>Escola
+        <select id="schoolSelect"></select>
+      </label>
+    </div>
+    <div id="newSchoolBox" class="new-school-box hidden">
+      <label>Nome da nova escola
+        <input id="newSchoolName" type="text" maxlength="120" placeholder="Ex.: Escola Municipal Maria das Graças">
+      </label>
+      <div class="actions">
+        <button id="createSchool">Criar escola</button>
+        <button id="cancelSchool" class="secondary">Cancelar</button>
+      </div>
+    </div>
+    <p id="schoolNotice" role="status" class="hint"></p>
+  </section>
 
   <section class="card" id="newRecordCard">
     <h2>Novo registro</h2>
@@ -120,11 +145,15 @@ const baseCodes = [
   'C10 | Chegar à sala com a aula já em andamento, bem depois do início; registrar o horário de chegada e, quando possível, os minutos de atraso'
 ];
 const baseActions = ['Orientação verbal','Segunda orientação','Mudança de lugar','Apoio individual','Encaminhamento à coordenação','Encaminhamento à direção'];
-const emptyData = () => ({classes:['6ºA','6ºB','7ºA','7ºB'],students:{'6ºA':[],'6ºB':[],'7ºA':[],'7ºB':[]},codes:[...baseCodes],actions:[...baseActions],records:[],setupVersion:2});
+const emptyData = () => ({classes:[],students:{},codes:[...baseCodes],actions:[...baseActions],records:[],setupVersion:2});
 const demoData = () => ({classes:['Turma Demonstração'],students:{'Turma Demonstração':['Estudante 1','Estudante 2','Estudante 3']},codes:[...baseCodes],actions:[...baseActions],records:[],setupVersion:2});
 
 let data = emptyData();
 let mode = 'locked'; // locked | demo | visualizador | admin
+let globalRole = null;
+let schools = [];
+let currentSchool = null;
+let currentSchoolRole = null;
 let filter = null;
 let rosterActive = '';
 let rosterDrafts = {};
@@ -147,20 +176,28 @@ function setBusy(busy){
 function setModeUI(){
   const badge = $('modeBadge');
   const note = $('modeNote');
+  const authenticated = globalRole === 'admin' || globalRole === 'visualizador';
   note.className = 'mode-note';
   $('logout').classList.toggle('hidden', mode === 'locked');
-  $('newRecordCard').classList.toggle('hidden', mode === 'visualizador');
-  $('settingsCard').classList.toggle('hidden', mode !== 'admin');
-  $('recordActions').classList.toggle('hidden', mode === 'visualizador');
+  $('schoolCard').classList.toggle('hidden', !authenticated);
+  $('newSchool').classList.toggle('hidden', globalRole !== 'admin');
+  $('newRecordCard').classList.toggle('hidden', mode === 'visualizador' || (authenticated && !currentSchool));
+  $('settingsCard').classList.toggle('hidden', mode !== 'admin' || !currentSchool);
+  $('recordActions').classList.toggle('hidden', mode === 'visualizador' || (authenticated && !currentSchool));
 
+  const schoolLabel = currentSchool ? ` · ${currentSchool.nome}` : '';
   if(mode === 'admin'){
-    badge.textContent = 'Administrador';
+    badge.textContent = 'Administrador' + schoolLabel;
     note.classList.add('viewer-note');
-    note.textContent = 'Modo administrador — registros e configurações são salvos no banco de dados online.';
+    note.textContent = currentSchool
+      ? `Modo administrador — trabalhando em ${currentSchool.nome}. Registros e configurações desta escola são salvos no banco de dados online.`
+      : 'Modo administrador — adicione ou selecione uma escola para começar.';
   } else if(mode === 'visualizador'){
-    badge.textContent = 'Somente visualização';
+    badge.textContent = 'Somente visualização' + schoolLabel;
     note.classList.add('viewer-note');
-    note.textContent = 'Modo visualizador — é possível consultar os registros, mas não criar, alterar ou excluir.';
+    note.textContent = currentSchool
+      ? `Modo visualizador — consulta liberada somente para ${currentSchool.nome}. Não é possível criar, alterar ou excluir registros.`
+      : 'Modo visualizador — nenhuma escola está vinculada a esta conta.';
   } else if(mode === 'demo'){
     badge.textContent = 'Demonstração';
     note.classList.add('demo-note');
@@ -170,7 +207,6 @@ function setModeUI(){
   }
   note.classList.toggle('hidden', mode === 'locked');
 }
-
 function option(select, items, placeholder){
   const old = select.value;
   select.replaceChildren();
@@ -226,9 +262,16 @@ function settings(){
 function saveRosterDrafts(){rememberRoster();for(const [c,names] of Object.entries(rosterDrafts))data.students[c]=lines(names);rosterDrafts={}}
 
 async function saveConfigToCloud(){
-  if(mode !== 'admin') return false;
-  const payload={id:1,classes:data.classes,students:data.students,codes:data.codes,actions:data.actions,updated_at:new Date().toISOString()};
-  const {error}=await sb.from('configuracoes').upsert(payload,{onConflict:'id'});
+  if(mode !== 'admin' || !currentSchool) return false;
+  const payload={
+    escola_id:currentSchool.id,
+    classes:data.classes,
+    students:data.students,
+    codes:data.codes,
+    actions:data.actions,
+    updated_at:new Date().toISOString()
+  };
+  const {error}=await sb.from('configuracoes_escola').upsert(payload,{onConflict:'escola_id'});
   if(error){console.error(error);throw error}
   return true;
 }
@@ -237,27 +280,11 @@ function dbToRecord(r){
   return {id:r.id,date:r.data,time:(r.horario||'').slice(0,5),class:r.turma,student:r.aluno,code:r.conduta,action:r.intervencao||'',outcome:r.resultado||'',phase:r.etapa||'',detail:r.observacao||''};
 }
 function recordToDb(r){
-  return {data:r.date,horario:r.time,turma:r.class,aluno:r.student,conduta:r.code,intervencao:r.action,resultado:r.outcome,etapa:r.phase,observacao:r.detail||null};
+  if(!currentSchool) throw new Error('Nenhuma escola selecionada.');
+  return {escola_id:currentSchool.id,data:r.date,horario:r.time,turma:r.class,aluno:r.student,conduta:r.code,intervencao:r.action,resultado:r.outcome,etapa:r.phase,observacao:r.detail||null};
 }
 
-async function loadCloudData(){
-  const {data:cfg,error:cfgError}=await sb.from('configuracoes').select('id,classes,students,codes,actions').eq('id',1).maybeSingle();
-  if(cfgError) throw cfgError;
-  data = emptyData();
-  if(cfg){
-    data.classes = Array.isArray(cfg.classes)?cfg.classes:[];
-    data.students = cfg.students && typeof cfg.students==='object'?cfg.students:{};
-    data.codes = Array.isArray(cfg.codes)?cfg.codes:[...baseCodes];
-    data.actions = Array.isArray(cfg.actions)?cfg.actions:[...baseActions];
-  } else if(mode === 'admin') {
-    await saveConfigToCloud();
-  }
-  const {data:rows,error:rowsError}=await sb.from('registros').select('*').order('data',{ascending:false}).order('horario',{ascending:false});
-  if(rowsError) throw rowsError;
-  data.records=(rows||[]).map(dbToRecord);
-}
-
-async function getCurrentRole(){
+async function getCurrentGlobalRole(){
   const {data:userData,error:userError}=await sb.auth.getUser();
   if(userError || !userData.user) return null;
   const {data:profile,error}=await sb.from('perfis').select('tipo').eq('user_id',userData.user.id).maybeSingle();
@@ -265,23 +292,147 @@ async function getCurrentRole(){
   return profile?.tipo || null;
 }
 
+async function loadAccessibleSchools(preferredId=null){
+  const {data:userData,error:userError}=await sb.auth.getUser();
+  if(userError || !userData.user) throw new Error('Sessão inválida.');
+
+  const {data:memberships,error:membershipError}=await sb
+    .from('usuario_escolas')
+    .select('escola_id,papel')
+    .eq('user_id',userData.user.id);
+  if(membershipError) throw membershipError;
+
+  const {data:schoolRows,error:schoolError}=await sb
+    .from('escolas')
+    .select('id,nome,created_at')
+    .order('created_at',{ascending:true});
+  if(schoolError) throw schoolError;
+
+  const roleBySchool = Object.fromEntries((memberships||[]).map(m=>[m.escola_id,m.papel]));
+  schools=(schoolRows||[])
+    .filter(e=>roleBySchool[e.id])
+    .map(e=>({...e,papel:roleBySchool[e.id]}));
+
+  const remembered = preferredId || localStorage.getItem('registro-sala-escola-atual');
+  currentSchool = schools.find(e=>e.id===remembered) || schools[0] || null;
+  currentSchoolRole = currentSchool?.papel || null;
+  mode = currentSchoolRole || globalRole || 'locked';
+  renderSchoolSelector();
+  setModeUI();
+
+  if(currentSchool){
+    localStorage.setItem('registro-sala-escola-atual',currentSchool.id);
+    await loadCurrentSchoolData();
+  }else{
+    localStorage.removeItem('registro-sala-escola-atual');
+    data=emptyData();
+  }
+}
+
+function renderSchoolSelector(){
+  const select=$('schoolSelect');
+  select.replaceChildren();
+  if(!schools.length){
+    const o=document.createElement('option');o.value='';o.textContent='Nenhuma escola vinculada';select.append(o);select.disabled=true;
+    $('schoolAccessHint').textContent=globalRole==='admin'?'Você ainda não possui escolas. Use “Adicionar escola”.':'Nenhuma escola foi liberada para esta conta.';
+    return;
+  }
+  select.disabled=false;
+  schools.forEach(e=>{const o=document.createElement('option');o.value=e.id;o.textContent=e.nome;select.append(o)});
+  if(currentSchool)select.value=currentSchool.id;
+  $('schoolAccessHint').textContent=currentSchool
+    ? `Acesso nesta escola: ${currentSchoolRole==='admin'?'administrador':'somente visualização'}.`
+    : 'Selecione uma escola.';
+}
+
+async function loadCurrentSchoolData(){
+  if(!currentSchool){data=emptyData();return}
+  const {data:cfg,error:cfgError}=await sb
+    .from('configuracoes_escola')
+    .select('escola_id,classes,students,codes,actions')
+    .eq('escola_id',currentSchool.id)
+    .maybeSingle();
+  if(cfgError) throw cfgError;
+
+  data=emptyData();
+  if(cfg){
+    data.classes=Array.isArray(cfg.classes)?cfg.classes:[];
+    data.students=cfg.students&&typeof cfg.students==='object'?cfg.students:{};
+    data.codes=Array.isArray(cfg.codes)&&cfg.codes.length?cfg.codes:[...baseCodes];
+    data.actions=Array.isArray(cfg.actions)&&cfg.actions.length?cfg.actions:[...baseActions];
+  }else if(mode==='admin'){
+    await saveConfigToCloud();
+  }
+
+  const {data:rows,error:rowsError}=await sb
+    .from('registros')
+    .select('*')
+    .eq('escola_id',currentSchool.id)
+    .order('data',{ascending:false})
+    .order('horario',{ascending:false});
+  if(rowsError) throw rowsError;
+  data.records=(rows||[]).map(dbToRecord);
+}
+
 async function enterAuthenticatedApp(){
-  const role = await getCurrentRole();
-  if(!['admin','visualizador'].includes(role)){
+  globalRole=await getCurrentGlobalRole();
+  if(!['admin','visualizador'].includes(globalRole)){
     await sb.auth.signOut();
     throw new Error('Conta sem permissão configurada.');
   }
-  mode=role;
-  setModeUI();
-  await loadCloudData();
+  await loadAccessibleSchools();
   finishOpenApp();
 }
-
 function finishOpenApp(){
   $('authMain').classList.add('hidden');
   $('appMain').classList.remove('hidden');
   refreshSelects();settings();renderRules();render();
 }
+
+$('schoolSelect').addEventListener('change',async()=>{
+  const selected=schools.find(e=>e.id===$('schoolSelect').value);
+  if(!selected)return;
+  currentSchool=selected;
+  currentSchoolRole=selected.papel;
+  mode=currentSchoolRole;
+  filter=null;rosterDrafts={};rosterActive='';
+  localStorage.setItem('registro-sala-escola-atual',currentSchool.id);
+  $('schoolNotice').textContent='Carregando '+currentSchool.nome+'...';
+  try{
+    setModeUI();
+    await loadCurrentSchoolData();
+    refreshSelects();settings();renderRules();render();
+    $('schoolNotice').textContent='';
+  }catch(e){console.error(e);$('schoolNotice').textContent='Não foi possível carregar esta escola.'}
+});
+
+$('newSchool').onclick=()=>{
+  $('newSchoolBox').classList.remove('hidden');
+  $('newSchoolName').focus();
+  $('schoolNotice').textContent='';
+};
+$('cancelSchool').onclick=()=>{
+  $('newSchoolBox').classList.add('hidden');
+  $('newSchoolName').value='';
+  $('schoolNotice').textContent='';
+};
+$('createSchool').onclick=async()=>{
+  if(globalRole!=='admin')return;
+  const nome=$('newSchoolName').value.trim();
+  if(!nome){$('schoolNotice').textContent='Informe o nome da escola.';return}
+  $('createSchool').disabled=true;
+  $('schoolNotice').textContent='Criando escola...';
+  try{
+    const {data:newId,error}=await sb.rpc('criar_escola',{p_nome:nome});
+    if(error)throw error;
+    $('newSchoolName').value='';
+    $('newSchoolBox').classList.add('hidden');
+    await loadAccessibleSchools(newId);
+    refreshSelects();settings();renderRules();render();
+    $('schoolNotice').textContent='Escola criada e selecionada.';
+  }catch(e){console.error(e);$('schoolNotice').textContent=e.message||'Não foi possível criar a escola.'}
+  finally{$('createSchool').disabled=false}
+};
 
 async function loginWithCode(code){
   const c=code.trim();
@@ -318,12 +469,12 @@ $('login').onclick=async()=>{
 $('accessCode').addEventListener('keydown',e=>{if(e.key==='Enter')$('login').click()});
 
 $('demo').onclick=()=>{
-  mode='demo';data=demoData();filter=null;rosterDrafts={};rosterActive='';setModeUI();finishOpenApp();
+  globalRole=null;schools=[];currentSchool=null;currentSchoolRole=null;mode='demo';data=demoData();filter=null;rosterDrafts={};rosterActive='';setModeUI();finishOpenApp();
 };
 
 $('logout').onclick=async()=>{
   try{if(mode==='admin'||mode==='visualizador')await sb.auth.signOut()}catch(e){console.error(e)}
-  mode='locked';data=emptyData();filter=null;rosterDrafts={};rosterActive='';
+  globalRole=null;schools=[];currentSchool=null;currentSchoolRole=null;mode='locked';data=emptyData();filter=null;rosterDrafts={};rosterActive='';
   $('appMain').classList.add('hidden');$('authMain').classList.remove('hidden');$('authNotice').textContent='';setModeUI();
 };
 
@@ -353,7 +504,7 @@ $('save').onclick=async()=>{
     else if(mode==='admin'){
       const {error}=await sb.from('registros').insert(recordToDb(record));
       if(error) throw error;
-      await loadCloudData();
+      await loadCurrentSchoolData();
     } else return;
     $('detail').value='';$('notice').textContent=mode==='demo'?'Registro criado apenas nesta demonstração.':'Registro salvo no banco de dados.';render();
   }catch(e){console.error(e);$('notice').textContent='Não foi possível salvar o registro.'}
@@ -394,7 +545,7 @@ function render(){
         try{
           if(mode==='demo') data.records=data.records.filter(x=>x.id!==r.id);
           else if(mode==='admin'){
-            const {error}=await sb.from('registros').delete().eq('id',r.id);if(error)throw error;await loadCloudData();
+            const {error}=await sb.from('registros').delete().eq('id',r.id).eq('escola_id',currentSchool.id);if(error)throw error;await loadCurrentSchoolData();
           }
           render();
         }catch(e){console.error(e);alert('Não foi possível excluir o registro.')}
@@ -507,13 +658,13 @@ $('doPrintRules').onclick=()=>window.print();
 $('closeRules').onclick=()=>document.body.classList.remove('print-rules');
 
 function download(name,content,type){let a=document.createElement('a'),u=URL.createObjectURL(new Blob([content],{type}));a.href=u;a.download=name;a.click();setTimeout(()=>URL.revokeObjectURL(u),1500)}
-$('backup').onclick=()=>{if(mode!=='admin'&&mode!=='demo')return;download(`registro-sala-backup-${today}.json`,JSON.stringify(data,null,2),'application/json')};
+$('backup').onclick=()=>{if(mode!=='admin'&&mode!=='demo')return;const schoolPart=currentSchool?'-'+currentSchool.nome.normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[^a-zA-Z0-9]+/g,'-').replace(/^-|-$/g,'').toLowerCase():'';download(`registro-sala${schoolPart}-backup-${today}.json`,JSON.stringify(data,null,2),'application/json')};
 $('csv').onclick=()=>{
   if(mode!=='admin'&&mode!=='demo')return;
   let keys=['date','time','class','student','phase','code','action','outcome','detail'];
   let quote=x=>{let s=String(x??'');if(/^[\s]*[=+@-]/.test(s))s="'"+s;return '"'+s.replaceAll('"','""')+'"'};
   let rows=[['Data','Horário','Turma','Estudante','Etapa','Conduta','Intervenção','Resultado','Complemento'],...data.records.map(r=>keys.map(k=>r[k]))];
-  download(`registro-sala-${today}.csv`,'\ufeff'+rows.map(row=>row.map(quote).join(';')).join('\r\n'),'text/csv;charset=utf-8')
+  const schoolPart=currentSchool?'-'+currentSchool.nome.normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[^a-zA-Z0-9]+/g,'-').replace(/^-|-$/g,'').toLowerCase():'';download(`registro-sala${schoolPart}-${today}.csv`,'\ufeff'+rows.map(row=>row.map(quote).join(';')).join('\r\n'),'text/csv;charset=utf-8')
 };
 
 $('restore').onchange=async e=>{
@@ -522,15 +673,16 @@ $('restore').onchange=async e=>{
   try{
     let v=JSON.parse(await file.text());
     if(!Array.isArray(v.classes)||!Array.isArray(v.codes)||!Array.isArray(v.actions)||!Array.isArray(v.records)||typeof v.students!=='object'||!v.students)throw Error('Formato inválido');
-    if(!confirm('Substituir as configurações e TODOS os registros online pelos dados deste backup?')){e.target.value='';return}
+    if(!currentSchool)throw Error('Nenhuma escola selecionada');
+    if(!confirm(`Substituir as configurações e TODOS os registros de ${currentSchool.nome} pelos dados deste backup?`)){e.target.value='';return}
     data={classes:v.classes,students:v.students,codes:v.codes,actions:v.actions,records:[],setupVersion:v.setupVersion||2};
     await saveConfigToCloud();
-    const {error:delError}=await sb.from('registros').delete().neq('id',-1);if(delError)throw delError;
+    const {error:delError}=await sb.from('registros').delete().eq('escola_id',currentSchool.id);if(delError)throw delError;
     if(v.records.length){
       const payload=v.records.map(r=>recordToDb(r));
       const {error:insError}=await sb.from('registros').insert(payload);if(insError)throw insError;
     }
-    rosterDrafts={};rosterActive='';await loadCloudData();refreshSelects();settings();renderRules();render();$('notice').textContent='Backup restaurado no banco de dados.';
+    rosterDrafts={};rosterActive='';await loadCurrentSchoolData();refreshSelects();settings();renderRules();render();$('notice').textContent='Backup restaurado nesta escola.';
   }catch(err){console.error(err);$('notice').textContent='Não foi possível restaurar o backup.'}
   e.target.value='';
 };
